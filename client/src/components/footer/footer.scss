@@ -1,0 +1,69 @@
+// Footer.scss
+.footer {
+  width: 100vw; // Ensures it spans the full viewport width
+  margin-left: calc(-50vw + 50%); // Centers and ignores parent padding
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .logo img {
+    width: 50px;
+    height: auto;
+  }
+
+  .links {
+    display: flex;
+    gap: 15px;
+
+    a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 15px;
+
+    a {
+      color: #333;
+      font-size: 18px;
+      transition: color 0.3s;
+
+      &:hover {
+        color: #007bff;
+      }
+    }
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+  }
