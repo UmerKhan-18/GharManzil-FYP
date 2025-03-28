@@ -1,7 +1,30 @@
 import { Link } from "react-router-dom";
 import "./card.scss";
+import apiRequest from "../../lib/apiRequest";
 
 function Card({ item }) {
+
+  const handleSendMessage = async () => {
+    if (!currentUser) {
+      navigate("/login");
+      return;
+    }
+    try {
+      const response = await apiRequest.post("/chats", {
+        receiverId: post.user.id,
+      });
+  
+      const chat = response.data;
+  
+      console.log("Chat received:", chat); // Debugging
+  
+      navigate(`/profile?chatId=${chat.id}`);
+    } catch (err) {
+      console.error("Error creating chat:", err);
+    }
+  };
+
+
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
@@ -32,7 +55,7 @@ function Card({ item }) {
               <img src="/save.png" alt="" />
             </div>
             <div className="icon">
-              <img src="/chat.png" alt="" />
+              <img src="/chat.png" alt="Chat" onClick={handleSendMessage}/>
             </div>
           </div>
         </div>

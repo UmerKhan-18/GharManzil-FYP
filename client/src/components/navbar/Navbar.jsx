@@ -29,7 +29,10 @@ function Navbar() {
       <div className="right">
         {currentUser ? (
           <div className="user">
-            <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
+               <img src={Array.isArray(currentUser.avatar) && currentUser.avatar.length > 0
+      ? currentUser.avatar
+      : "/noavatar.jpg"
+      } />
             <span>{currentUser.username}</span>
             <Link to="/profile" className="profile">
               {number > 0 && <div className="notification">{number}</div>}

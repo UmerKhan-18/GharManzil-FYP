@@ -89,7 +89,7 @@ function Chat({ chats }) {
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
           >
-            <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
+            <img src={Array.isArray(c.receiver?.avatar) && c.receiver?.avatar.length > 0 ? c.receiver?.avatar : "/noavatar.jpg" } />
             <span>{c.receiver.username}</span>
             <p>{c.lastMessage}</p>
           </div>

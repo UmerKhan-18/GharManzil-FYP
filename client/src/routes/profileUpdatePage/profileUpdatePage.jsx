@@ -51,7 +51,8 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar || currentUser?.avatar || "/noavatar.jpg"} alt="Profile" className="avatar" />
+        <img src={Array.isArray(currentUser?.avatar) && currentUser?.avatar.length > 0 ? currentUser?.avatar : "/noavatar.jpg" } alt="Profile" className="avatar" />
+         {console.log(currentUser?.avatar)}
         <UploadWidget
           uwConfig={{
             cloudName: "lamadev",

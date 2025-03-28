@@ -41,7 +41,7 @@ function App() {
           element: <Register />,
         },
         {
-          path: "/about", // ✅ Add About Page Route
+          path: "/about", 
           element: <About />,
         },
       ],

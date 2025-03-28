@@ -22,6 +22,7 @@ function ProfilePage() {
       console.log(err);
     }
   };
+
   return (
     <div className="profilePage">
       <div className="details">
@@ -35,7 +36,10 @@ function ProfilePage() {
           <div className="info">
             <span>
               Avatar:
-              <img src={currentUser.avatar || "noavatar.jpg"} alt="" />
+              <img src={Array.isArray(currentUser.avatar) && currentUser.avatar.length > 0
+      ? currentUser.avatar
+      : "/noavatar.jpg"
+      } />
             </span>
             <span>
               Username: <b>{currentUser.username}</b>
