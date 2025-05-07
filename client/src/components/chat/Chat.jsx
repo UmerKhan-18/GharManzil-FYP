@@ -99,7 +99,14 @@ function Chat({ chats }) {
         <div className="chatBox">
           <div className="top">
             <div className="user">
-              <img src={chat.receiver.avatar || "noavatar.jpg"} alt="" />
+            <img
+                src={chat.receiver.avatar}
+                alt="Receiver Avatar"
+                onError={(e) => {
+                  e.target.onerror = null; // Prevent infinite loop
+                  e.target.src = "/noavatar.jpg";
+                }}
+              />
               {chat.receiver.username}
             </div>
             <span className="close" onClick={() => setChat(null)}>

@@ -1,0 +1,128 @@
+.upload-wrapper {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.upload-card {
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 768px;
+  padding: 1.5rem;
+}
+
+.upload-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.input-file {
+  font-size: medium;
+  width: 100%;
+  border: 1px solid #d1d5db;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  outline: none;
+  margin-bottom: 0.5rem;
+
+  &:focus {
+    border-color: #14b8a6;
+    box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.5);
+  }
+}
+
+.file-info {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.success-msg {
+  background-color: #d1fae5;
+  color: #047857;
+  padding: 1rem;
+  border-radius: 0.375rem;
+}
+
+.error-msg {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 1rem;
+  border-radius: 0.375rem;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    border-radius: 0.375rem;
+    text-align: center;
+    transition: background-color 0.3s;
+    
+
+    &.upload-btn {
+      background-color: #14b8a6;
+      color: white;
+
+      &:hover {
+        background-color: #0d9488;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    &.verify-btn {
+      background-color: #3b82f6;
+      color: white;
+      margin-top: 1rem;
+
+      @media (min-width: 640px) {
+        margin-top: 0;
+      }
+
+      &:hover {
+        background-color: #2563eb;
+      }
+    }
+  }
+}

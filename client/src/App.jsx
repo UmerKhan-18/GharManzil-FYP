@@ -10,6 +10,8 @@ import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
 import { listPageLoader, profilePageLoader, singlePageLoader } from "./lib/loaders";
+import UploadDocumentPage from "./routes/uploadDocumentPage/uploadDocumentPage";
+import EditPostPage from "./routes/editPostPage/editPostPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -62,6 +64,14 @@ function App() {
         {
           path: "/add",
           element: <NewPostPage />,
+        },
+        {
+          path: "/editPostPage/:postId",
+          element: <EditPostPage />,
+        },
+        {
+          path: "/upload-documents",
+          element: <UploadDocumentPage />,
         },
       ],
     },

@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import { useNavigate } from "react-router-dom";
 
@@ -10,16 +9,17 @@ function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const inputs = Object.fromEntries(formData);
 
-    try {
-      const res = await apiRequest.post("/posts", {
+    // Save data to localStorage for use on the UploadDocumentsPage
+    localStorage.setItem(
+      "newPostData",
+      JSON.stringify({
         postData: {
           title: inputs.title,
           price: parseInt(inputs.price),
@@ -31,7 +31,7 @@ function NewPostPage() {
           property: inputs.property,
           latitude: inputs.latitude,
           longitude: inputs.longitude,
-          images: images,
+          images,
         },
         postDetail: {
           desc: value,
@@ -43,12 +43,10 @@ function NewPostPage() {
           bus: parseInt(inputs.bus),
           restaurant: parseInt(inputs.restaurant),
         },
-      });
-      navigate("/"+res.data.id)
-    } catch (err) {
-      console.log(err);
-      setError(error);
-    }
+      })
+    );
+
+    navigate("/upload-documents");
   };
 
   return (
@@ -59,23 +57,23 @@ function NewPostPage() {
           <form onSubmit={handleSubmit}>
             <div className="item">
               <label htmlFor="title">Title</label>
-              <input id="title" name="title" type="text" />
+              <input id="title" name="title" type="text" required />
             </div>
             <div className="item">
               <label htmlFor="price">Price</label>
-              <input id="price" name="price" type="number" />
+              <input id="price" name="price" type="number" required />
             </div>
             <div className="item">
               <label htmlFor="address">Address</label>
-              <input id="address" name="address" type="text" />
+              <input id="address" name="address" type="text" required />
             </div>
             <div className="item description">
               <label htmlFor="desc">Description</label>
-              <ReactQuill theme="snow" onChange={setValue} value={value} />
+              <ReactQuill theme="snow" value={value} onChange={setValue} />
             </div>
             <div className="item">
               <label htmlFor="city">City</label>
-              <input id="city" name="city" type="text" />
+              <input id="city" name="city" type="text" required />
             </div>
             <div className="item">
               <label htmlFor="bedroom">Bedroom Number</label>
@@ -94,16 +92,14 @@ function NewPostPage() {
               <input id="longitude" name="longitude" type="text" />
             </div>
             <div className="item">
-              <label htmlFor="type">Type</label>
+              <label>Type</label>
               <select name="type">
-                <option value="rent" defaultChecked>
-                  Rent
-                </option>
+                <option value="rent">Rent</option>
                 <option value="buy">Buy</option>
               </select>
             </div>
             <div className="item">
-              <label htmlFor="type">Property</label>
+              <label>Property</label>
               <select name="property">
                 <option value="apartment">Apartment</option>
                 <option value="house">House</option>
@@ -111,9 +107,8 @@ function NewPostPage() {
                 <option value="land">Land</option>
               </select>
             </div>
-
             <div className="item">
-              <label htmlFor="utilities">Utilities Policy</label>
+              <label>Utilities Policy</label>
               <select name="utilities">
                 <option value="owner">Owner is responsible</option>
                 <option value="tenant">Tenant is responsible</option>
@@ -121,45 +116,40 @@ function NewPostPage() {
               </select>
             </div>
             <div className="item">
-              <label htmlFor="pet">Pet Policy</label>
+              <label>Pet Policy</label>
               <select name="pet">
                 <option value="allowed">Allowed</option>
                 <option value="not-allowed">Not Allowed</option>
               </select>
             </div>
             <div className="item">
-              <label htmlFor="income">Income Policy</label>
-              <input
-                id="income"
-                name="income"
-                type="text"
-                placeholder="Income Policy"
-              />
+              <label>Income Policy</label>
+              <input name="income" type="text" placeholder="Income Policy" />
             </div>
             <div className="item">
-              <label htmlFor="size">Total Size (sqft)</label>
-              <input min={0} id="size" name="size" type="number" />
+              <label>Total Size (sqft)</label>
+              <input min={0} name="size" type="number" />
             </div>
             <div className="item">
-              <label htmlFor="school">School</label>
-              <input min={0} id="school" name="school" type="number" />
+              <label>School</label>
+              <input min={0} name="school" type="number" />
             </div>
             <div className="item">
-              <label htmlFor="bus">bus</label>
-              <input min={0} id="bus" name="bus" type="number" />
+              <label>Bus</label>
+              <input min={0} name="bus" type="number" />
             </div>
             <div className="item">
-              <label htmlFor="restaurant">Restaurant</label>
-              <input min={0} id="restaurant" name="restaurant" type="number" />
+              <label>Restaurant</label>
+              <input min={0} name="restaurant" type="number" />
             </div>
             <button className="sendButton">Add</button>
-            {error && <span>error</span>}
+            {error && <span className="error-msg">{error}</span>}
           </form>
         </div>
       </div>
       <div className="sideContainer">
         {images.map((image, index) => (
-          <img src={image} key={index} alt="" />
+          <img src={image} key={index} alt="Preview" />
         ))}
         <UploadWidget
           uwConfig={{
