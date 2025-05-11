@@ -33,7 +33,8 @@ Follow these instructions to set up the GharManzil Renting Application locally:
    ```bash
     https://github.com/UmerKhan-18/GharManzil-FYP.git
    ```
-**2- Server Setup:** Navigate to the api folder and follow the instructions in the api's README.md to set up the backend.
+**2- Server Setup:** 
+   Navigate to the api folder and follow the instructions in the api's README.md to set up the backend.
 
 **3- Client Setup:**
    ```bash
