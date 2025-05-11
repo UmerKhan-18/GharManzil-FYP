@@ -156,7 +156,6 @@ export const addPost = async (req, res) => {
 };
 
 export const updatePost = async (req, res) => {
-  console.log("1️⃣ Function Executed!");  // Confirm route is hit
 
   const postId = req.params.id;
   const tokenUserId = req.userId;
@@ -164,32 +163,21 @@ export const updatePost = async (req, res) => {
 
   const post = postData;
 
-  console.log("2️⃣ Post ID from params:", postId);
-  console.log("3️⃣ User ID from token:", tokenUserId);
-  console.log("4️⃣ Received post:", post);
-  console.log("5️⃣ Received postDetail:", postDetail);
-
   if (!isValidObjectId(postId)) {         
-    console.log("6️⃣ Invalid post ID format");
     return res.status(400).json({ message: "Invalid post ID format" });
   }
 
   try {
-    console.log("7️⃣ Finding post with ID:", postId);
     const existingPost = await prisma.post.findUnique({
       where: { id: postId },
       include: { postDetail: true },
     });
 
-    console.log("8️⃣ Existing Post:", existingPost);
-
     if (!existingPost) {
-      console.log("9️⃣ Post not found");
       return res.status(404).json({ message: "Post not found" });
     }
 
     if (existingPost.userId !== tokenUserId) {
-      console.log("🔟 Authorization failed");
       return res.status(403).json({ message: "Not authorized to update this post" });
     }
 
@@ -230,7 +218,6 @@ export const updatePost = async (req, res) => {
       }
     }
 
-    console.log("🔁 Updating post...");
     const updatedPost = await prisma.post.update({
       where: { id: postId },
       data: {
@@ -240,10 +227,8 @@ export const updatePost = async (req, res) => {
       include: { postDetail: true },
     });
 
-    console.log("✅ Updated Post:", updatedPost);
     res.status(200).json(updatedPost);
   } catch (err) {
-    console.error("❌ Error updating post:", err);
     res.status(500).json({ message: "Failed to update post" });
   }
 };
@@ -271,18 +256,22 @@ export const deletePost = async (req, res) => {
       return res.status(403).json({ message: "Not Authorized!" });
     }
 
-    
      // Step 1: Delete PropertyDocument (if exists)
+     await prisma.savedPost.deleteMany({
+      where: { postId: id },
+    });
+
+     // Step 2: Delete PropertyDocument (if exists)
      await prisma.propertyDocument.deleteMany({
       where: { postId: id },
     });
 
-    // Step 2: Delete PostDetail (if exists)
+    // Step 3: Delete PostDetail (if exists)
     await prisma.postDetail.deleteMany({
       where: { postId: id },
     });
 
-    // Step 3: Delete Post
+    // Step 4: Delete Post
     await prisma.post.delete({
       where: { id },
     });

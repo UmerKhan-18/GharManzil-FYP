@@ -19,12 +19,11 @@ function EditPostPage() {
     const fetchPost = async () => {
       try {
         const res = await axios.get(`http://localhost:8800/api/posts/${postId}`);
-        console.log("Fetched Post Data:", res.data);  // Debugging line
         setPost(res.data);
         setDesc(res.data.postDetail?.desc || "");
         setImages(res.data.images || []);
       } catch (err) {
-        console.error("Error fetching post:", err);  // Debugging line
+        setError("Failed to fetch post data");  
       }
     };
     fetchPost();
@@ -35,11 +34,8 @@ function EditPostPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting...");
     const formData = new FormData(e.target);
-    console.log("Form Data:", formData);  // Debugging line
     const inputs = Object.fromEntries(formData.entries());
-    console.log("inputs:", inputs);  // Debugging line
   
     const updatedPostData = {
       ...post,
@@ -67,10 +63,7 @@ function EditPostPage() {
       restaurant: inputs.restaurant ? parseInt(inputs.restaurant, 10) : undefined,
     };
   
-    console.log("Updated Post Data:", updatedPostData);  // Debugging line
-    console.log("Updated Post Detail:", updatedPostDetail);  // Debugging line
     try {
-      console.log('about to hit axios.put')
       await apiRequest.put(`/posts/${postId}`, {
         postData: updatedPostData,
         postDetail: updatedPostDetail,

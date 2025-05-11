@@ -29,11 +29,9 @@ const getUser = (userId) => {
 };
 
 io.on("connection", (socket) => {
-  console.log("New user connected:", socket.id);
 
   socket.on("newUser", (userId) => {
     addUser(userId, socket.id);
-    console.log("User added:", onlineUser);
   });
 
   socket.on("sendMessage", ({ receiverId, data }) => {
@@ -45,11 +43,10 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", () => {
     removeUser(socket.id);
-    console.log("User disconnected:", socket.id);
   });
 });
 
 // Start the server on port 4000
 server.listen(4000, () => {
-  console.log("✅ Socket.io server running on port 4000");
+  console.log("Socket.io server running on port 4000");
 });

@@ -26,22 +26,16 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    console.log("🔹 Middleware se aaya userId:", req.userId);
-    
     const id = req.params.id;
     const tokenUserId = req.userId;
 
     if (!tokenUserId) {
-      console.log("❌ Token se userId nahi aayi!");
       return res.status(401).json({ message: "Token is missing or invalid" });
     }
 
     if (id !== tokenUserId) {
-      console.log(`❌ ID mismatch: URL ID (${id}) !== Token ID (${tokenUserId})`);
       return res.status(403).json({ message: "Not Authorized!" });
     }
-
-    console.log("✅ Authorized user, proceeding with update");
 
     const { password, avatar, cnic, ...inputs } = req.body;
 
@@ -60,7 +54,6 @@ export const updateUser = async (req, res) => {
       },
     });
 
-    console.log("✅ User updated successfully:", updatedUser);
     res.status(200).json(updatedUser);
   } catch (err) {
     console.error("❌ Error updating user:", err);

@@ -71,9 +71,6 @@ export const login = async (req, res) => {
       { expiresIn: age }
     );
 
-     // ✅ Debugging: Check token payload
-     console.log("🔹 JWT Generated for Logged-in User:", jwt.decode(token));
-
     const { password: _, ...userInfo } = user; // Exclude password from response
 
     res

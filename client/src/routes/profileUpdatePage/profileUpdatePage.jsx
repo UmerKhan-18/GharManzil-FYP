@@ -55,7 +55,7 @@ function ProfileUpdatePage() {
          {console.log(currentUser?.avatar)}
         <UploadWidget
           uwConfig={{
-            cloudName: "djtcgbd8s",
+            cloudName: "lamadev",
             uploadPreset: "estate",
             multiple: false,
             maxImageFileSize: 2000000,

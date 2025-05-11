@@ -108,9 +108,11 @@ const UploadDocumentsPage = () => {
             <button type="submit" className="btn upload-btn" disabled={uploading}>
               {uploading ? "Uploading..." : "Upload"}
             </button>
+            {/*
             <Link to="/properties/verification-status" className="btn verify-btn">
               Verify
             </Link>
+            */}   
           </div>
         </form>
       </div>
