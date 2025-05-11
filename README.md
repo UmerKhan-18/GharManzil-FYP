@@ -4,7 +4,7 @@ Welcome to the **GharManzil** repository! This repository contains the complete 
 
 ---
 
-## 🚀 **Project Overview**
+## **Project Overview**
 The Full Stack Rental Application is designed to provide a seamless platform for property owners and renters to list, discover, and manage properties efficiently. Built with a modern tech stack, the application ensures fast, secure, and real-time property transactions.
 
 The application consists of two main components:
@@ -15,7 +15,7 @@ The application consists of two main components:
 
 ---
 
-## 📌 **Features**
+## **Features**
 - User registration and CNIC-based authentication.
 - Property owners can list their properties with detailed descriptions and images.
 - Renters can search for properties based on location, price range, and other filters.
@@ -26,17 +26,25 @@ The application consists of two main components:
 
 ---
 
-## ⚙️ **Setup**
+## **Setup**
 Follow these instructions to set up the GharManzil Renting Application locally:
 
-**1- Clone the Repository:** git clone https://github.com/UmerKhan-18/GharManzil-FYP.git
-
+**1- Clone the Repository:** 
+ ```bash
+    git clone https://github.com/UmerKhan-18/GharManzil-FYP.git
+   ```
 **2- Server Setup:** Navigate to the api folder and follow the instructions in the api's README.md to set up the backend.
 
-**3- Client Setup:** Navigate to the client folder and follow the instructions in the client's README.md to set up the frontend.
-
-**4- Socket Setup:** Navigate to the socket folder and run the following command:
+**3- Client Setup:**
    ```bash
+    cd client
+    npm install
+    npm run dev
+   ```
+**4- Socket Setup:**
+   ```bash
+    cd socket
+    npm install
     node app.js
    ```
 ---
